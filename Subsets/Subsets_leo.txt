@@ -1,0 +1,38 @@
+/*
+  Auther: Leo Lu
+  Question 1: Is any rule for output seqeunce ??
+  Corner case: null input??
+  Time complexicity: O(2^n)
+  Space complexitty: O(n)
+*/
+public class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        int length = nums.length;
+        ArrayList<List<Integer>> ret = new ArrayList<>();
+        ret.add(new ArrayList<>(0));
+        
+        HashMap<Integer, Integer> map = new HashMap<>(length);
+        for (int i = 0; i < length; i++) {
+            map.put(nums[i], i);
+        }
+        
+        int nextLayerIndex = ret.size();
+        int index = 0;
+        for (int layer = 0; layer < length; layer++) {
+            while (index < nextLayerIndex) {
+                ArrayList<Integer> base = (ArrayList<Integer>) ret.get(index++);
+                int startIndex = layer > 0 ? map.get(base.get(layer-1))+1 :
+                    0;
+                for (int j = startIndex; j < length ;j++) {
+                    ArrayList<Integer> current = new ArrayList<>(layer);
+                    current.addAll(base);
+                    current.add(nums[j]);
+                    ret.add(current);
+                }
+            }
+            nextLayerIndex = ret.size();
+        }
+        
+        return ret;
+    }
+}
