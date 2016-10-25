@@ -1,8 +1,11 @@
 /*
   Auther: Leo Lu
   Question 1: Is any rule for output seqeunce ??
+  Question 2: Any upper bound on input length ??
+  Question 3: Is the input sorted ??
+  
   Corner case: null input??
-  Time complexicity: O(2^n)
+  Time complexicity: O( 1/3 *n * 2^n)
   Space complexitty: O(n)
 */
 public class Solution {
