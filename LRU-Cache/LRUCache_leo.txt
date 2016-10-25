@@ -4,6 +4,8 @@
   Question 2: If so, what should we deal with invalid value ?
   Question 3: How to define the size of LRUCache consumed ?
   Question 4: Should we notify user when the contain in the cached be removed?
+
+  Corner case 1: Capacity <= 0
   
   Time complexicity: read O(1), write O(1)
   Space complexitty: O(cap)
