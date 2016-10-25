@@ -1,0 +1,197 @@
+/*
+  Auther: Leo Lu
+  Question 1: Do we need to check if any invalid input (not sorted), if so what's the output
+  Question 2: What should we do if we have zeor length of null pointer from both input
+  Time complexicity: O (n+m)
+  Space complexitty: O(1)
+ */
+public class Solution {
+  public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+      int size1 = nums1.length;
+      int size2 = nums2.length;
+      int size = size1 + size2;
+      boolean isOdd = (size & 1) != 0;
+      int mid = (size-1)/2;
+        
+      int index1 = 0;
+      int index2 = 0;
+      int i = 0;
+      while (index1 < size1 && index2 < size2) {
+          if (nums1[index1] <= nums2[index2]) {
+              if (i == mid) {
+                  if (isOdd) return nums1[index1];
+                  int value = nums1[index1++];
+                  return (value + (index1 >= size1 ? nums2[index2] : 
+                                  (nums1[index1] <= nums2[index2] ? nums1[index1] : nums2[index2]) ))/2.0;
+              }
+              index1++;
+          } else {
+              if (i == mid) {
+                  if (isOdd) return nums2[index2];
+                  int value = nums2[index2++];
+                  return (value + (index2 >= size2 ? nums1[index1] : 
+                                  (nums1[index1] <= nums2[index2] ? nums1[index1] : nums2[index2]) ))/2.0;
+              }
+              index2++;
+          }
+          i++;
+      }
+      
+      while (index1 < size1) {
+          if (i == mid) return isOdd ? nums1[index1] : (nums1[index1]+nums1[index1+1])/2.0;
+          index1++;
+          i++;
+      }
+      
+      while (index2 < size2) {
+          if (i == mid) return isOdd ? nums2[index2] : (nums2[index2]+nums2[index2+1])/2.0;
+          index2++;
+          i++;
+      }
+      throw new IllegalStateException();
+  }
+}
+
+
+
+
+/*
+  Auther: Leo Lu
+  Question 1: Do we need to check if any invalid input (not sorted), if so what's the output
+  Question 1: What should we do if we have zeor length of null pointer from both input
+  Time complexicity: O (log(n+m))
+  Space complexitty: O(1)
+ */
+public class Solution {
+  public double findKthValue(int[] nums1, int index1L, int index1H, int[] nums2, int index2L, int index2H, int target) {
+      
+      while(index1L <= index1H && index2L <= index2H) {
+          int index1M = (index1L+index1H)/2;
+          int index2M = (index2L+index2H)/2;
+          int half = (index1M - index1L  + index2M - index2L + 1);
+          if (target <= half) {
+              if (nums1[index1M] >= nums2[index2M]) {
+                  index1H = index1M-1;
+              } else {
+                  index2H = index2M-1;
+              }
+          } else {
+              if (nums1[index1M] <= nums2[index2M]) {
+                  target -= (index1M - index1L +1);
+                  index1L = index1M+1;
+              } else {
+                  target -= (index2M - index2L +1);
+                  index2L = index2M+1;
+              }
+          }
+      }
+      return index1H < index1L ? nums2[index2L+target-1] : nums1[index1L+target-1];
+      
+  }
+  public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+      int size = nums1.length + nums2.length;
+      int pos = (size+1)/2;
+      double ret = findKthValue(nums1, 0, nums1.length - 1, nums2, 0, nums2.length - 1, pos);
+      if ((size & 1) == 0) {
+          ret += findKthValue(nums1, 0, nums1.length - 1, nums2, 0, nums2.length - 1, pos+1);
+          ret /= 2.0;
+      }
+      return ret;
+  }
+}
+
+
+/*
+  Auther: Leo Lu
+  Question 1: Do we need to check if any invalid input (not sorted), if so what's the output
+  Question 1: What should we do if we have zeor length of null pointer from both input
+  Time complexicity: O (log(min(n,m)))
+  Space complexitty: O(1)
+ */
+ class Solution {
+  public double findMedianSortedArrays(int[] a, int[] b) {
+      if (a.length > b.length) return findMedianSortedArrays(b, a);
+      int size = a.length + b.length;
+      final int aMax = a.length - 1;
+      final int bMax = b.length - 1;
+      int aL = 0, aH = aMax;
+      int aMid = 0, bMid = 0;
+      int cut = (size-1)/2 - 1;
+      if (aMax < 0) {
+          aMid = -1;
+          bMid = (size-1)/2;
+      }
+      while (aL <= aH) {
+          aMid = (aL+aH)/2;
+          bMid = cut - aMid ;
+          if (bMid < bMax && a[aMid] > b[bMid+1]) {
+              aH = aMid - 1;
+          } else if (aMid < aMax && a[aMid+1] < b[bMid]) {
+              aL = aMid + 1;
+          } else {
+              break;
+          }
+      }
+      if (aL > aH) {
+          aMid = -1;
+          bMid = cut - aMid;
+      }
+      
+      int ret = 0;
+      if (aMid < 0 || a.length == 0)  {
+          ret = b[bMid];
+      } else if (bMid < 0)  {
+          ret = a[aMid];
+      } else {
+        ret = a[aMid] >= b[bMid] ? a[aMid] : b[bMid];
+      }
+      if ((size &1) == 1) return ret;
+      bMid++;
+      aMid++;
+      if (bMid > bMax)  return (ret + a[aMid])/2.0;
+      if (aMid > aMax)  return (ret + b[bMid])/2.0;
+      return (ret + (a[aMid] <= b[bMid] ? a[aMid] : b[bMid]))/2.0;
+  }
+}
+
+
+
+
+/*
+  Auther: Leo Lu
+  Question 1: Do we need to check if any invalid input (not sorted), if so what's the output
+  Question 1: What should we do if we have zeor length of null pointer from both input
+  Time complexicity: O (log(min(n,m)))
+  Space complexitty: O(1)
+  
+  This solution helps to reduce the odd/even problem and many corner case, but cost much more time
+ */
+ class Solution {
+  public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+    int size1 = nums1.length;
+    int size2 = nums2.length;
+    if (size1 < size2) return findMedianSortedArrays(nums2, nums1);
+    if (size2 == 0) return (nums1[(size1-1)>>1] + nums1[size1>>1])/2.0;
+    int size = size1+size2;
+    
+    int lo = 0, hi = size2 <<1;
+    while (lo <= hi) {
+        int mid2 = (lo + hi) >>1;
+        int mid1 = size - mid2;
+        
+        int L1 = (mid1 == 0) ? Integer.MIN_VALUE : nums1[(mid1-1)>>1];
+        int L2 = (mid2 == 0) ? Integer.MIN_VALUE : nums2[(mid2-1)>>1];
+        int R1 = (mid1 == size1 <<1) ? Integer.MAX_VALUE : nums1[(mid1)>>1];
+        int R2 = (mid2 == size2 <<1) ? Integer.MAX_VALUE : nums2[(mid2)>>1];
+        
+        if (L1 > R2) {
+            lo = mid2 + 1;
+        } else if (L2 > R1) {
+            hi = mid2 - 1;
+        } else {
+            return (Math.max(L1, L2) + Math.min(R1, R2)) / 2.0;
+        }
+    }
+    return -1;
+  }
+}
