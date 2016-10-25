@@ -1,7 +1,7 @@
 /*
   Auther: Leo Lu
   Question 1: Do we need to check if any invalid input (not sorted), if so what's the output
-  Question 2: What should we do if we have zeor length of null pointer from both input
+  Question 2: What should we do if we have zero length or null pointer from both input
   Time complexicity: O (n+m)
   Space complexitty: O(1)
  */
