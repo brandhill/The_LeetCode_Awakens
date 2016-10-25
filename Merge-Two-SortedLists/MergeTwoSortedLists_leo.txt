@@ -1,0 +1,29 @@
+ /*
+  Auther: Leo Lu
+  Question 1: Do we need to check if any invalid input (not sorted), if so what's the output
+  Question 2: Are the nodes in output list new or all from the existing nodes??
+  Corner case: null input
+  Time complexicity: O (min(m,n))
+  Space complexitty: O(1)
+ */
+public class Solution {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode head = new ListNode(0);
+        ListNode current = head;
+        while (null != l1 && null != l2) {
+            ListNode node;
+            if (l1.val <= l2.val) {
+                node = new ListNode(l1.val);
+                l1 = l1.next;
+            } else {
+                node = new ListNode(l2.val);
+                l2 = l2.next;
+            }
+            current.next = node;
+            current = node;
+        }
+        current.next = null != l1 ? l1 : l2;
+        
+        return head.next;
+    }
+}
