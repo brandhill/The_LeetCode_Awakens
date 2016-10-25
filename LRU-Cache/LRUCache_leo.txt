@@ -1,0 +1,181 @@
+/*
+  Auther: Leo Lu
+  Question 1: Is all the input value won't be -1 or larger than -1??
+  Question 2: If so, what should we deal with invalid value ?
+  Question 3: How to define the size of LRUCache consumed ?
+  Question 4: Should we notify user when the contain in the cached be removed?
+  
+  Time complexicity: read O(1), write O(1)
+  Space complexitty: O(cap)
+ */
+class LRUCache extends GenericLRUCache<Integer, Integer> {
+    public LRUCache(int capacity) {
+        super(capacity);
+    }
+    public int get(int key) {
+        Integer value = super.get(key);
+        return null != value ? value: -1;
+    }
+}
+
+
+class GenericLRUCache<K, V> {
+    private int capacity;
+    private int mSize;
+    private LinkedHashMap<K, V> map = new LinkedHashMap<>(10, 0.75f, true);
+    
+    protected int sizeOf(V value) {
+        return 1;
+    }
+    protected void onEntryRemoved(K key, V value) {
+    }
+    
+    public GenericLRUCache(int capacity) {
+        if (capacity <= 0) throw new IllegalArgumentException();
+        this.capacity = capacity;
+    }
+    
+    public V get(K key) {
+        return map.get(key);       
+    }
+    
+    public void set(K key, V value) {
+        if (null != value) {
+            mSize += sizeOf(value);
+            V oldValue = map.put(key, value);
+            if (null != oldValue) mSize -= sizeOf(oldValue);
+            if (mSize > capacity) trimToSize();
+        } else {
+            V oldValue = map.remove(key);
+            mSize -= sizeOf(oldValue);
+        }
+    }
+    private void trimToSize() {
+        Iterator<Map.Entry<K, V>> it = map.entrySet().iterator();
+        int capacity = this.capacity;
+        while (mSize > capacity && it.hasNext()) {
+            Map.Entry<K, V> entry = it.next();
+            V value = entry.getValue();
+            mSize -= sizeOf(value);
+            it.remove();
+            onEntryRemoved(entry.getKey(), value);
+        }
+    }
+}
+
+/*
+  Auther: Leo Lu
+  Question 1: Is all the input value won't be -1 or larger than -1??
+  Question 2: If so, what should we deal with invalid value ?
+  Question 3: How to define the size of LRUCache consumed ?
+  Question 4: Should we notify user when the contain in the cached be removed?
+  
+  Time complexicity: read O(1), write O(1)
+  Space complexitty: O(cap)
+ */
+class LRUCache extends BaseLRUCache<Integer, Integer> {
+    LRUCache(int capacity) {
+        super(capacity);
+    }
+    public int get(int key) {
+        Integer value = super.get(key);
+        return null != value ? value : -1;
+    }
+    public void set(int key, int value) {
+        if (-1 == value) {
+            remove(key);
+        } else {
+            super.set(key, value);
+        }
+    }
+}
+
+class BaseLRUCache<K, V> {
+    class Node {
+        K mKey;
+        V mValue;
+        Node mPrev;
+        Node mNext;
+        Node (K key, V value) {
+            mKey = key;
+            mValue = value;
+        }
+        public String toString() {
+            return "k:"+mKey+", v:"+mValue;
+        }
+    }
+    
+    private int mCapacity;
+    private int mSize;
+    private HashMap<K, Node> map = new HashMap<K, Node>();
+    private Node mHead = new Node(null, null);
+    
+    public BaseLRUCache(int capacity) {
+        if (capacity <= 0) throw new IllegalArgumentException();
+        mCapacity = capacity;
+        mHead.mNext = mHead.mPrev = mHead;
+    }
+    
+    protected int sizeOf(V value) {
+        return 1;
+    }
+
+    protected void onItemRemoved(K key, V value) {
+    }
+    
+    private void updateToNewest(Node node) {
+        node.mNext = mHead.mNext;
+        node.mPrev = mHead;
+        mHead.mNext.mPrev = node;
+        mHead.mNext = node;
+    }
+    
+    public V get(K key) {
+        Node node = map.get(key);
+        if (null == node) return null;
+        removeFromList(node);
+        updateToNewest(node);
+        return node.mValue;
+    }
+    
+    private void removeFromList(Node node) {
+        node.mPrev.mNext = node.mNext;
+        node.mNext.mPrev = node.mPrev;
+        node.mNext = node.mPrev = null;
+    }
+    
+    public V remove(K key) {
+        Node node = map.remove(key);
+        if (null != node) {
+            mSize -= sizeOf(node.mValue);
+            removeFromList(node);
+        }
+        return node.mValue;
+    }
+    
+    public void set(K key, V value) {
+        if (null == value) {
+            remove(key);
+            return;
+        }
+        Node newNode = new Node(key, value);
+        Node node = map.put(key, newNode);
+        updateToNewest(newNode);
+        mSize += (sizeOf(value));
+        if (null != node) {
+            removeFromList(node);
+            mSize -= sizeOf(node.mValue);
+        }
+        trimToSize();
+    }
+    
+    private void trimToSize() {
+        Node head = mHead;
+        Node node = head;
+        while (mSize > mCapacity && (node = head.mPrev) != head) {
+            map.remove(node.mKey);
+            removeFromList(node);
+            mSize -= sizeOf(node.mValue);
+        }
+    }
+}
