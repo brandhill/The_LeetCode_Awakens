@@ -1,3 +1,15 @@
+/*
+    Author: Hill
+
+    Given a 2d grid map of '1's (land) and '0's (water), count the number of islands.
+    An island is surrounded by water and is formed by connecting adjacent lands horizontallyor vertically.
+    You may assume all four edges of the grid are all surrounded by water.
+
+
+    題意：一個只包含數字 0 和 1 的二維矩陣，找出裡面不相鄰、只包含1的區塊個數。
+
+    思路：DFS、BFS。只要遍歷一遍，碰到一個1，就把它周圍所有相連的1都標記為非1，這樣整個遍歷過程中碰到的1的個數就是所求解。
+*/
 
 
 public int numIslands(char[][] grid) {
