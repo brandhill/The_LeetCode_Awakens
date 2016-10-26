@@ -5,7 +5,7 @@
   Question 3: Is the input sorted ??
   
   Corner case: null input??
-  Time complexicity: O( 1/3 *n * 2^n)
+  Time complexicity: O(1+0.5n*2^n)) => O(n*2^n)
   Space complexitty: O(n)
 */
 public class Solution {
@@ -34,6 +34,37 @@ public class Solution {
                 }
             }
             nextLayerIndex = ret.size();
+        }
+        
+        return ret;
+    }
+}
+
+/*
+  Auther: Leo Lu
+  Question 1: Is any rule for output seqeunce ??
+  Question 2: Any upper bound on input length ??
+  Question 3: Is the input sorted ??
+  
+  Corner case: null input??
+  Time complexicity: O(1+0.5n*2^n)) => O(n*2^n)
+  Space complexitty: O(n)
+*/
+public class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        int length = nums.length;
+        ArrayList<List<Integer>> ret = new ArrayList<>();
+        ret.add(new ArrayList<>(0));
+        
+        for (int i = 0; i < length; i++) {
+            int value = nums[i];
+            for (int j = 0, size = ret.size(); j < size; j++) {
+                List<Integer> base = ret.get(j);
+                ArrayList<Integer> current = new ArrayList<>(base.size()+1);
+                current.addAll(base);
+                current.add(value);
+                ret.add(current);
+            }
         }
         
         return ret;
