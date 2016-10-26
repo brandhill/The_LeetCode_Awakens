@@ -48,7 +48,7 @@ public class Solution {
   
   Corner case: null input??
   Time complexicity: O(1+0.5n*2^n)) => O(n*2^n)
-  Space complexitty: O(n)
+  Space complexitty: O(1)
 */
 public class Solution {
     public List<List<Integer>> subsets(int[] nums) {
