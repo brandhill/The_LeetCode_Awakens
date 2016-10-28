@@ -11,7 +11,7 @@
 
 題號請參考 [Leetcode problems](https://leetcode.com/problemset/algorithms/)
 
-如果沒有題號，可先省略
+如果沒有題號，就先省略
 
 #### 檔案
 Owner 整理好的 solution 檔名請用 _sol.txt 當 suffix (ex: TwoSum_sol.txt)
@@ -21,7 +21,9 @@ Owner 整理好的 solution 檔名請用 _sol.txt 當 suffix (ex: TwoSum_sol.txt
 
 ### Resource
 * [geeksforgeeks](http://www.geeksforgeeks.org/)
+* [segmentfault](https://segmentfault.com/)
 * [一畝三分地](https://instant.1point3acres.com/)
+
 
 ### Data Structure
 * [Data Structure Visualizations](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html)
