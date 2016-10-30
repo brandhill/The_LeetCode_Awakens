@@ -1,0 +1,148 @@
+/*
+  Author: Charles Tsai
+  
+  Concept:
+	The solution is built from a recursive basis. Consider original example [1, 2, 3].
+	To construct the set of subsets, it can be decomposited like this:
+	
+	result = [] + 1*[2, 3] + 2*[3] + 3
+	
+	Question 1: Should we take care of null input case? In fact my code has dealed with this.
+	Question 2: The order of elements in this set is significant or not? If so, how to sort them? This solution does not sort items.
+	Question 3: I prefer to use ArrayList while constructing a List instance. Does it matter?
+	
+  Time complexity: O(2^n)
+  Space complexity: O(n)
+  
+*/
+public class Solution {
+    
+    private List<List<Integer>> mResult = new ArrayList<List<Integer>>();
+    
+    public List<List<Integer>> subsets(int[] nums) {
+		
+		result.clear();
+		
+        if (nums == null) {
+            throw new IllegalArgumentException("null input!");
+        }
+        
+        getSubsets(nums, 0, nums.length - 1);
+        
+        return mResult;
+    }
+    
+    /*
+        Get subsets from in specific range of the input integer array.
+    */
+    private void getSubsets(int[] nums, int start, int end) {
+		
+        if (start > end) {
+            List<Integer> list = new ArrayList<Integer>();
+            mResult.add(list);
+            return;
+        }
+        
+        getSubsets(nums, start + 1, end);
+        
+        List<List<Integer>> iterationList = new ArrayList<List<Integer>>();
+        for (List<Integer> l : result) {
+            List<Integer> list = new ArrayList<Integer>();
+            list.add(nums[start]);
+            list.addAll(l);
+            iterationList.add(list);
+        }
+		
+        mResult.addAll(iterationList);
+    }
+}
+
+/*
+	Similar solution: simply the input of recursive method.
+ */
+ public class Solution {
+	public List<List<Integer>> subsets(int[] nums) {
+		
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+		
+        if(nums == null || nums.length==0) return result;
+        subsetR(nums,nums.length-1,result);
+        return result;
+    }
+    
+    private void subsetR(int[] nums, int i, List<List<Integer>> result) {
+        if(i<0) {
+            result.add(new ArrayList<Integer>());
+            return;
+        }
+        
+        subsetR(nums,i-1,result);
+        int size = result.size();
+        for(int j = 0; j <size ; j++) {
+            List<Integer> newList = new ArrayList<Integer>();
+            newList.addAll(result.get(j));
+            newList.add(nums[i]);
+            result.add(newList);
+        }
+    }
+}
+
+/*
+    Bit operation solution.
+	
+	Concept:
+	  A n-bit long bitwise array can represent all possible combinations. What we need to do is filling corresponding value into a list for that iteration.
+	  For example, the set [1,2,3] has size 3. Therefore it has 2^3 combinations of subsets.
+	  
+	  2^3 = 8 = 0b1000. We can treat it as a presence bit flag set:
+	  
+	  0b000 = []
+	  0b001 = [3]
+	  0b010 = [2]
+	  0b011 = [2, 3]
+	  0b100 = [1]
+	  0b101 = [1, 3]
+	  0b110 = [1, 2]
+	  0b111 = [1, 2, 3]
+	  
+	  All subsets are found in such a manner.
+	  
+	  An obvious con is that it's constrained by primitive data length. If passed length is 
+	  
+	  Question 1: How long the input array will be?
+	  Question 2: Should we sort outputed subsets? If so, how?
+	  
+	  Time complexity: O(2^n)
+	  Space complexity: O(1)
+ */
+ 
+ public class Solution {
+	public List<List<Integer>> subsets(int[] nums) {
+		
+		if (nums.length >= 32) {
+			throw new IllegalArgumentException("input array is too long");
+		}
+		
+		int numOfElements = 1 << nums.length;
+		List<List<Integer>> results = new ArrayList<List<Integer>>();
+		results.add(new ArrayList<Integer>());
+		for(int i = 1; i < numOfElements; i++) {
+			List<Integer> element = new ArrayList<Integer>();
+			int temp = i;
+			int index = 0;
+			/* I use a temp to operate i which stands for i th element of results. In this way, it doesn't need to do comparison when temp is 0.*/
+			while(temp != 0) {
+			  if((temp & 0x1 ) == 1)
+				element.add(nums[index]);
+				temp = temp >>> 1;
+			  index++;
+			}
+				results.add(element);
+		}
+		return results;     
+	}
+ }
+ 
+ /*
+	TODO: Refind bit opearion styled solution to a boolean array to eliminate length constraint?
+  */
