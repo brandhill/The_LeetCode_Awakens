@@ -3,7 +3,7 @@
   Auther: Leo Lu
   Question 1: Do we get a zero size of row numbers or column numbers or null input
   Time complexicity: O (mn)
-  Space complexitty: O(max(m,n))
+  Space complexitty: O(m*n)
   
   This solution helps to reduce the odd/even problem and many corner case, but cost much more time
  */
