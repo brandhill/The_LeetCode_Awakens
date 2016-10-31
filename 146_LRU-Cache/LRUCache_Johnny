@@ -1,0 +1,123 @@
+/*
+  Auther: Johnny
+  Question 1: Is set operation also seen as used?
+  
+  Time complexicity: O(1)
+  Space complexitty: O(n)
+ */
+
+public class LRUCache {
+    class Node {
+        int key;
+        int val;
+        Node pre;
+        Node next;
+        
+        public Node(int key, int val) {
+            this.key = key;
+            this.val = val;
+        }
+    }
+    
+    private final int mCapacity;
+    private HashMap<Integer, Node> mCache;
+    private Node mHead;
+    private Node mTail;
+    
+    public LRUCache(int capacity) {
+        mCapacity = capacity;
+        mCache = new HashMap(capacity/4*3);
+    }
+    
+    public int get(int key) {
+        if (mCache.containsKey(key)) {
+            Node node = mCache.get(key);
+            moveToFirst(node);
+            
+            return node.val;
+        }
+        
+        return -1;
+    }
+    
+    public void set(int key, int value) {
+        Node node = null;
+        
+        if (!mCache.containsKey(key)) {
+            // insert
+            if (mCache.size() == mCapacity) {
+                // Cache full case
+                Node removed = removeTail();
+                mCache.remove(removed.key);
+            }
+            
+            node = new Node(key, value);
+            addToList(node);
+            mCache.put(node.key, node);   
+        } else {
+            // update
+            node = mCache.get(key);
+            node.val = value;
+            moveToFirst(node);
+        }
+    }
+    
+    private void moveToFirst(Node node) {
+        if (mHead == node) {
+            return;
+        }
+            
+        removeFromList(node);
+        addToList(node);
+    }
+    
+    private Node removeTail() {
+        Node lastTail = mTail;
+        removeFromList(lastTail);
+        
+        return lastTail;
+    }
+    
+    private void addToList(Node node) {
+        // Node becomes to be head
+        node.pre = null;
+        node.next = null;
+        
+        if (mHead == null) {
+            // first item
+            mHead = node;
+            mTail = node;
+            
+            return;
+        }
+        
+        mHead.pre = node;
+        node.next = mHead;
+        mHead = node;
+    }
+    
+    private void removeFromList(Node node) {
+        if (mHead == mTail && mHead == node) {
+            mHead = null;
+            mTail = null;
+            
+            return;
+        }
+        
+        if (mHead == node) {
+            mHead = node.next;
+            return;
+        }
+        
+        if (mTail == node) {
+            mTail = node.pre;
+            return;
+        }
+        
+        Node curPre = node.pre;
+        Node curNext = node.next;
+        
+        curPre.next = curNext;
+        curNext.pre = curPre; 
+    }
+}
