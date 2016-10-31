@@ -1,0 +1,53 @@
+/*
+  Auther: Johnny
+  Question 1: Is a square map?
+  
+  Time complexicity: ???
+  Space complexitty: O(1)
+ */
+public class Solution {  
+    public int numIslands(char[][] grid) {
+        int count = 0;
+        
+        int height = grid.length;
+        if (height == 0) {
+            return count;
+        }
+        
+        int width = grid[0].length;
+        if (width == 0) {
+            return count;
+        }
+        
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (grid[i][j] == '1') {
+                    count++;
+                    removeIsland(grid, i, j);
+                }
+            }
+        }
+        
+        return count;
+    }
+    
+    private void removeIsland(char[][] grid, int i, int j) {
+        if (i < 0 || i >= grid.length) {
+            return;
+        }
+        if (j < 0 || j >= grid[0].length) {
+            return;
+        }
+        
+        if (grid[i][j] == '1') {
+            grid[i][j] = '0';
+        } else {
+            return;
+        }
+        
+        removeIsland(grid, i-1, j); // upper
+        removeIsland(grid, i, j-1); // left
+        removeIsland(grid, i+1, j); // bottom
+        removeIsland(grid, i, j+1); // right
+    }
+}
