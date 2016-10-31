@@ -1,0 +1,34 @@
+/*
+  Auther: Johnny
+  Question 1: Does the node order in same level matter?
+  Question 2: How to deal with the null root?
+  
+  Time complexicity: O(n)
+  Space complexitty: O(1)
+ */
+public class Solution {
+    private ArrayList<List<Integer>> mLevels = new ArrayList();
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        traverse(root, 0);
+        
+        return mLevels;
+    }
+    
+    private void traverse(TreeNode root, int level) {
+        if (root == null) {
+            return;
+        }
+        
+        List<Integer> nodes;
+        if (level == mLevels.size()) {
+            nodes = new ArrayList<Integer>();
+            mLevels.add(level, nodes);    
+        } else {
+            nodes = mLevels.get(level);
+        }
+        nodes.add(root.val);
+        
+        traverse(root.left, level+1);
+        traverse(root.right, level+1);
+    }
+}
