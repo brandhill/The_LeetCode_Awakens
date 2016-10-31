@@ -1,0 +1,63 @@
+
+/*
+  Auther: Leo Lu
+  Question 1: Do we get a zero size of row numbers or column numbers or null input
+  Time complexicity: O (mn)
+  Space complexitty: O(max(m,n))
+  
+  This solution helps to reduce the odd/even problem and many corner case, but cost much more time
+ */
+public class Solution {
+    private class Point {
+        int x;
+        int y;
+        Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+    
+    public int numIslands(char[][] grid) {
+        if (grid.length == 0) return 0;
+        int count = 0;
+        int row = grid.length;
+        int col = grid[0].length;
+        boolean[][] visited = new boolean[row][col];
+        
+        LinkedList<Point> list = new LinkedList<>();
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (visited[i][j]) continue;
+                if ('0' == grid[i][j]) {
+                    visited[i][j] = true;
+                    continue;
+                }
+                
+                list.add(new Point(i ,j));
+                while (!list.isEmpty()) {
+                    Point p = list.removeFirst();
+                    int x = p.x;
+                    int y = p.y;
+                    if (visited[x][y]) {
+                        continue;
+                    }
+                    visited[x][y] = true;
+                    if (grid[x][y]!= '0') {
+                        x--;
+                        if ((x >=0 && !visited[x][y]))list.add(new Point(x,y));
+                        x +=2;
+                        if ((x < row && !visited[x][y]))list.add(new Point(x,y));
+                        x--    ;
+                        y--;
+                        if ((y >=0 && !visited[x][y]))list.add(new Point(x,y));
+                        y+=2;
+                        if ((y < col && !visited[x][y]))list.add(new Point(x,y));
+                    }
+                }
+                count++;
+            }
+        }
+        
+        return count;
+    }
+}
