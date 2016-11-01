@@ -13,6 +13,10 @@
  * <p>
  * <p>
  * https://leetcode.com/problems/subsets/
+ 
+ A general approach to backtracking questions in Java (Subsets, Permutations, Combination Sum, Palindrome Partitioning)
+ https://discuss.leetcode.com/topic/46159/a-general-approach-to-backtracking-questions-in-java-subsets-permutations-combination-sum-palindrome-partitioning
+ 
  */
 public class Subsets {
 
