@@ -1,63 +1,6 @@
 /*
   Auther: Leo Lu
   Question 1: Do we need to check if any invalid input (not sorted), if so what's the output
-  Question 2: What should we do if we have zero length or null pointer from both input
-  Time complexicity: O (n+m)
-  Space complexitty: O(1)
- */
-public class Solution {
-  public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-      int size1 = nums1.length;
-      int size2 = nums2.length;
-      int size = size1 + size2;
-      boolean isOdd = (size & 1) != 0;
-      int mid = (size-1)/2;
-        
-      int index1 = 0;
-      int index2 = 0;
-      int i = 0;
-      while (index1 < size1 && index2 < size2) {
-          if (nums1[index1] <= nums2[index2]) {
-              if (i == mid) {
-                  if (isOdd) return nums1[index1];
-                  int value = nums1[index1++];
-                  return (value + (index1 >= size1 ? nums2[index2] : 
-                                  (nums1[index1] <= nums2[index2] ? nums1[index1] : nums2[index2]) ))/2.0;
-              }
-              index1++;
-          } else {
-              if (i == mid) {
-                  if (isOdd) return nums2[index2];
-                  int value = nums2[index2++];
-                  return (value + (index2 >= size2 ? nums1[index1] : 
-                                  (nums1[index1] <= nums2[index2] ? nums1[index1] : nums2[index2]) ))/2.0;
-              }
-              index2++;
-          }
-          i++;
-      }
-      
-      while (index1 < size1) {
-          if (i == mid) return isOdd ? nums1[index1] : (nums1[index1]+nums1[index1+1])/2.0;
-          index1++;
-          i++;
-      }
-      
-      while (index2 < size2) {
-          if (i == mid) return isOdd ? nums2[index2] : (nums2[index2]+nums2[index2+1])/2.0;
-          index2++;
-          i++;
-      }
-      throw new IllegalStateException();
-  }
-}
-
-
-
-
-/*
-  Auther: Leo Lu
-  Question 1: Do we need to check if any invalid input (not sorted), if so what's the output
   Question 1: What should we do if we have zeor length of null pointer from both input
   Time complexicity: O (log(n+m))
   Space complexitty: O(1)
