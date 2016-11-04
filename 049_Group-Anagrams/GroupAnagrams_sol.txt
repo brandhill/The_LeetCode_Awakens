@@ -1,9 +1,27 @@
+/*
+    Author: Charles Tsai
+
+    Concept:
+        This solution is robust. I have built a method to check if 2 strings are anagrams, and search entire array to make sure 
+        all items in the list are checked. Checked item will be removed from the list. If all items are checked but there're still
+        items in the source, run the check again to make another anagram group.
+
+        Unfortunately, this solution is easy to think but cannot pass computation time requirement. The test case on LeetCode with the input
+        containing a certain numbers of strings consumes too many time to pass the check.
+
+        Question 1: Spending time is an important concern or not?
+        Question 2: Should we sort  the result?
+
+    Time complexity: O(n^2)O(n) = O(n^3)
+    Space complexity: O(n)
+
+ */
 public class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
         if (strs == null) {
             throw new IllegalArgumentException("input is null!");
         }
-        List<String> source = new LinkedList<String>(Arrays.asList(strs));
+        List<String> source = new ArrayList<String>(Arrays.asList(strs));
         List<List<String>> result = new ArrayList<List<String>>();
 
         while(!source.isEmpty()) {
@@ -14,13 +32,15 @@ public class Solution {
             while (index < source.size()) {
                 if (checkAnagram(target, source.get(index))) {
                     anagramSet.add(source.get(index));
-                    source.remove(index);
+                    List<String> subSource = source.subList(0, index);
+                    subSource.addAll(source.subList(index + 1, source.size()));
+                    source = subSource;
                 } else {
                     ++index;
                 }
             }
-            anagramSet.add(target);
-            source.remove(0);
+            anagramSet.add(source.get(0));
+            source = source.subList(1, source.size());
             result.add(anagramSet);
         }
 
@@ -28,11 +48,13 @@ public class Solution {
     }
 
     private boolean checkAnagram(String str1, String str2) {
+        if (str1.equals(str2)) return true;
         if (str1.length() != str2.length()) return false;
 
         int count = str1.length();
 
-        String tmpStr1 = new String(str1), tmpStr2 = new String(str2);
+        String tmpStr1 = new String(str1);
+        String tmpStr2 = new String(str2);
 
         for (int i = 0; i < count; ++i) {
             char target = tmpStr1.charAt(i);
@@ -40,11 +62,68 @@ public class Solution {
             if (index == -1) {
                 return false;
             } else {
-                String tmpStr = tmpStr2.substring(0, index);
-                tmpStr.concat(tmpStr2.substring(index + 1, tmpStr2.length()));
-                tmpStr2 = tmpStr;
+                tmpStr2 = tmpStr2.substring(0, index) + tmpStr2.substring(index + 1, tmpStr2.length());
             }
         }
         return true;
+    }
+}
+
+/*
+    Solution by means of hash map with sorted string as the key.
+
+    Using sorted string as the unique key to find out if the item belongs to which group.
+
+    Time complexity: O(nlogn)O(n) = O(n^2logn)
+    Space complexity: O(n)
+ */
+
+public class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        if (strs == null || strs.length == 0) return new ArrayList<List<String>>();
+        Map<String, List<String>> map = new HashMap<String, List<String>>();
+        for (String s : strs) {
+            char[] ca = s.toCharArray();
+            Arrays.sort(ca);
+            String keyStr = String.valueOf(ca);
+            if (!map.containsKey(keyStr)) map.put(keyStr, new ArrayList<String>());
+            map.get(keyStr).add(s);
+        }
+        return new ArrayList<List<String>>(map.values());
+    }
+}
+
+/*
+    Optimized solution. Using prime numbers to be a unique representation for each character.
+    Using the multiplication among every characters to be the key of the hashmap.
+
+    Need to memorize 26 distinctive primes to make this solution complete.
+
+    Seems that only this solution can pass LeetCode testcases.
+
+    Time complexity: O(n)
+    Space complexity: O(n)
+
+ */
+public class Solution {
+    int[] primes = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103};
+
+    /* Instead of sorting, use a good hash function */
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> res = new LinkedList<List<String>>();
+        HashMap<Integer, Integer> hash = new HashMap<Integer, Integer>();
+        int mask, index = 0;
+
+        for(String s: strs) {
+            mask = 1;
+            for(int i=0; i<s.length(); i++) mask *= primes[s.charAt(i)-'a'];
+
+            if( !hash.containsKey(mask) ) {
+                res.add( new LinkedList<String>() );
+                hash.put(mask, index++);
+            }
+            res.get(hash.get(mask)).add(s);
+        }
+        return res;
     }
 }
