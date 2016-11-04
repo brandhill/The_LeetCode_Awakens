@@ -1,0 +1,50 @@
+public class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        if (strs == null) {
+            throw new IllegalArgumentException("input is null!");
+        }
+        List<String> source = new LinkedList<String>(Arrays.asList(strs));
+        List<List<String>> result = new ArrayList<List<String>>();
+
+        while(!source.isEmpty()) {
+            List<String> anagramSet = new ArrayList<String>();
+            int targetCount = source.size() - 1;
+            String target = source.get(0);
+            int index = 1;
+            while (index < source.size()) {
+                if (checkAnagram(target, source.get(index))) {
+                    anagramSet.add(source.get(index));
+                    source.remove(index);
+                } else {
+                    ++index;
+                }
+            }
+            anagramSet.add(target);
+            source.remove(0);
+            result.add(anagramSet);
+        }
+
+        return result;
+    }
+
+    private boolean checkAnagram(String str1, String str2) {
+        if (str1.length() != str2.length()) return false;
+
+        int count = str1.length();
+
+        String tmpStr1 = new String(str1), tmpStr2 = new String(str2);
+
+        for (int i = 0; i < count; ++i) {
+            char target = tmpStr1.charAt(i);
+            int index = tmpStr2.indexOf(target);
+            if (index == -1) {
+                return false;
+            } else {
+                String tmpStr = tmpStr2.substring(0, index);
+                tmpStr.concat(tmpStr2.substring(index + 1, tmpStr2.length()));
+                tmpStr2 = tmpStr;
+            }
+        }
+        return true;
+    }
+}
