@@ -7,6 +7,9 @@
  * <p>
  * <p>
  * A linked list can be reversed either iteratively or recursively. Could you implement both?
+ * <p>
+ * Time:  O(n)
+ * Space: O(1)
  */
 public class ReverseLinkedList {
 
