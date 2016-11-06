@@ -8,3 +8,14 @@
 一般情況下，不是所有的節點都有對應的值，只有葉子節點和部分內部節點所對應的鍵才有相關的值。
 
 ![一個保存了8個鍵的trie結構，"A", "to", "tea", "ted", "ten", "i", "in", and "inn".](../img/500px-Trie_example.svg.png?raw=true "一個保存了8個鍵的trie結構")
+
+
+### 用途
+1. Autocomplete
+2. Spell checker
+3. IP routing (Longest prefix matching)
+4. T9 predictive text
+5. Solving word games
+
+[Editorial Solution](https://leetcode.com/articles/implement-trie-prefix-tree/)
+ 
