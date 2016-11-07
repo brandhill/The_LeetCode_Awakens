@@ -9,19 +9,17 @@ public class Solution {
     }
 
     int binarySearch(int[] nums, int target) {
-        int begin = 0, end = nums.length = 1, i = nums.length / 2;
+        int index = begin + (end - begin) / 2;
 
-        while(true) {
-            if (target == nums[i]) {
-                return i;
-            } else if (target > nums[i]) {
-                begin = i;
-                i = begin + (end - begin) / 2;
-            } else {
-                end = i;
-                i = (end - begin) / 2;
-            }
-            if ( i == nums.length - 1 || i == 0) return -1;
+        if (target == nums[index]) {
+            System.out.println("got target!!!");
+            return index;
+        } else if (target > nums[index]) {
+            System.out.println("searching " + (begin + (end - begin)/2 + 1) + " to " + end);
+            return binarySearch(nums, begin + (end - begin)/2 + 1, end, target);
+        } else {
+            System.out.println("searching " + begin + " to " + (begin + (end - begin)/2 - 1));
+            return binarySearch(nums, begin, begin + (end - begin)/2 - 1, target);
         }
     }
 }
