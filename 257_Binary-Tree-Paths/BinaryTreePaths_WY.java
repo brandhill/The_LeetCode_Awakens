@@ -1,5 +1,5 @@
 /**
- * Time : O(logN)
+ * Time : O(N)
  * Space: O(N)
  */
 public class Solution {
