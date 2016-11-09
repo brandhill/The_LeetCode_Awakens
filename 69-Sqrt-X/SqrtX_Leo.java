@@ -1,7 +1,7 @@
 public class Solution {
 
 /*
- * Bit mask, time complexity O(1).缺點是當數字不大時效能比較差(10^12以下是差的, 10^12~2^20不一定, 因為執行時間會被bit數影響,所以)
+ * Bit mask, time complexity O(1), 但本質和其他的方法一樣. 缺點是當數字不大時效能比較差(10^12以下是差的, 10^12~2^20不一定, 因為執行時間會被bit數影響,所以)
  * 在輸入為平均分布時這個最好, 但若以小整數為主就不見得好
  */
 
@@ -28,7 +28,7 @@ public class Solution {
       }
       return root;
    }
-
+    
 /*最慢
  */
     public int mySqrt(int x) {
@@ -47,4 +47,34 @@ public class Solution {
         }
         return h; 
     }
+    
+/*
+* 合併上面三招, 效能好都不行. 複雜度約lg(lg(x))
+*/
+public int mySqrt(int x) {
+    int h = 31;
+    int l = 0;
+    int root = 0;
+    int m = 0;
+    int halfX = (x>>1);            
+    while (h >= l) {
+        m = (h+l)/2;
+        root = 1<<m;
+        if (root > x) {
+            h = m -1;
+        } else if (root < x) {
+            if (root > halfX) break;
+            l = m + 1;
+        } else {
+            break;
+        }
+    }
+    root = 1<<((m>>1)+1);
+    int mag = 0;
+    while (root > mag) {
+        mag = x/root;
+        root = (root+mag) >> 1;
+    }
+    return root;
+}
 }
