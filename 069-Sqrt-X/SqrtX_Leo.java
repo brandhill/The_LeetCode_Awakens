@@ -102,8 +102,6 @@ public class Solution {
      *  Use newton's method with a x0 which has at least 1 sig. bit.
      *  The first sig bit is get by binary search
      *  time complexity O(ln(ln(n))), where n <= 2^M, M is the numbers of bit of int.
-     *  However, if we don't know how to find a good x0, its' performance is only better than binary search
-     *  by some coeficient.
      */
     private static class NewtonWithOneMsbSqrt implements SqrtCaculator {
         public int mySqrt(int x) {
