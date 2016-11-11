@@ -1,3 +1,10 @@
+/*
+ *		Author: Charles Tsai
+ *		
+ *		It's a 1-pass sorting algorithm and quite intuitive. Iterate all elements and check if it's the color we expect.
+ *		If no, find the first right color and exchange with it. If cannot find right color, it means that current color is exhausted.
+ *		Therefore we can start to try next color for the sorting.
+ */
 public class Solution {
     public void sortColors(int[] nums) {
         int currentTarget = 0;
