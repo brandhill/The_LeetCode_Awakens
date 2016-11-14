@@ -1,7 +1,7 @@
 /*
  *Use counting sort, its advantage is easy to extend if we have more colors.
  *Time : O(n)
- *Space: O(k)
+ *Space: numbers of Color k, O(k). if k is constant, O(1)
  */
 
 public class Solution {
