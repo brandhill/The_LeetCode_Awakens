@@ -23,10 +23,8 @@
  * DummyNode 可以避免 if null 的判斷，簡化代碼  
  * 雙指針／快慢指針  
  * [Linked List的复习总结](http://www.jianshu.com/p/3d4be8cbf94b)
-* Sort
- * Comparison-based sorts, O(nlogn): QuickSort, MergeSort, ...
- * Non-comparison sorts, O(n+k): countingSort, BucketSort, RadixSort, ...  
-   trade space with performance
+* [Sort](./Sort.md)
+ * Arrays.sort(nums);
 * [Tree](./Tree.md)
  * DFS
 * [Dynamic Programming](./DP.md)
