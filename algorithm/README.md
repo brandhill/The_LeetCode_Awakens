@@ -16,15 +16,18 @@
 # Cheat Sheet
 *!! keep this sheet as compact as possible !!*
 
+* bitwise
+ * INT 操作要處理 overflow / underflow，偷懶就用 long 來處理
+ * XOR - 可以用來做 swap，X := X XOR Y; Y := Y XOR X; X := X XOR Y
 * LinkedList
-> DummyNode 可以避免 if null 的判斷，簡化代碼  
-> 雙指針／快慢指針  
-> [Linked List的复习总结](http://www.jianshu.com/p/3d4be8cbf94b)
-
+ * DummyNode 可以避免 if null 的判斷，簡化代碼  
+ * 雙指針／快慢指針  
+ * [Linked List的复习总结](http://www.jianshu.com/p/3d4be8cbf94b)
 * Sort
-
+ * Comparison-based sorts, O(nlogn): QuickSort, MergeSort, ...
+ * Non-comparison sorts, O(n+k): countingSort, BucketSort, RadixSort, ...  
+   trade space with performance
 * [Tree](./Tree.md)
-> ABCD
-
+ * DFS
 * [Dynamic Programming](./DP.md)
-> **The key to any DP problem is to come up with the state equation.**  
+**The key to any DP problem is to come up with the state equation.**  

@@ -2,6 +2,7 @@
 ## 树的遍历
 Key Concepts
 > Binary Tree遍历问题有一个关键点就是当指针走到底层以后如何返回的问题
+實作上可以用選擇 recursive / iterative+stack
 
 ### preorder
 * recursive
