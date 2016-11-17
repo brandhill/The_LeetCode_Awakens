@@ -27,5 +27,7 @@
  * Arrays.sort(nums);
 * [Tree](./Tree.md)
  * DFS
+* Priority Queue
+ * [用 Heap 實作 Priority Queue](http://pages.cs.wisc.edu/~vernon/cs367/notes/11.PRIORITY-Q.html)
 * [Dynamic Programming](./DP.md)
 **The key to any DP problem is to come up with the state equation.**  
