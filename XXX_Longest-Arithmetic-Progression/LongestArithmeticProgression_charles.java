@@ -6,6 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+/*
+
+    We can use this website to verify our solution: https://www.random.org/integer-sets/
+
+*/
 public class LongestArithmeticProgression {
 
     private static final boolean DUMP_LAP = true;
