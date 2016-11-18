@@ -4,8 +4,8 @@
 
 # thoughs
 if node n is the common ancestor, one of those conditions should be true.
-1. find p and q in node's subtree. one in left and the other in the right.
-2. node n is p or q, and find the other on in n's subtree.
+1. node p and q belongs to node's subtree. one in left and the other in the right.
+2. node n is p or q, and the other one belongs to n's subtree.
 
 we can do a **post-order** tree traversal to find p and q.
 during the traversal, we will found the a node fulfill the conditions.
