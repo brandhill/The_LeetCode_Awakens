@@ -6,3 +6,7 @@
 
 Links
 * [Algorithm - Ch2 動態規劃 Dynamic Programming](http://mropengate.blogspot.tw/2015/01/algorithm-ch2-dynamic-programming.html)
+
+[(1) 实战动态规划（直播coding）（33:45）](https://www.julyedu.com/video/play/27/19)
+[动态规划：从新手到专家](http://www.hawstein.com/posts/dp-novice-to-advanced.html)
+[什麼是動態規劃？動態規劃的意義是什麼？ - 知乎](https://www.zhihu.com/question/23995189)
