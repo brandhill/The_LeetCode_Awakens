@@ -17,6 +17,10 @@ http://www.geeksforgeeks.org/length-of-the-longest-arithmatic-progression-in-a-s
 	-1 1 3 7 11 15 19 20 21 22
 	output
 	5
+
+
+
+	https://www.youtube.com/watch?v=_nCsPn7_OgI
 */
 
 public class LongestArithmeticProgression {
