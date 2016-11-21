@@ -11,7 +11,8 @@ Space: O(n)
     令Q(i) 為所有小於 n 的平方數之集合, Q1 = 1, Q2 = 4, Q3 = 9 , ... 
     則d(n) = min (d(n-Q1), d(n-Q2), d(n-Q3), ....) 
     
-3.Branch and bound - BFS瀏覽狀態空間樹 
+3.BFS找最短路徑 
 Time:  O(n^(3/2)
 Space: O(n)
+參考連結的圖, 但不要用他的方法, 他沒有注意到這不是一個tree而是一個graph, 所以他的方法效能不好
 https://discuss.leetcode.com/topic/26262/short-python-solution-using-bfs/2
