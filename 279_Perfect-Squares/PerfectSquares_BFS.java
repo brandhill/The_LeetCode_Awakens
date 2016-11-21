@@ -1,5 +1,5 @@
 /**
- * Time(O(n))
+ * Time(O(n*sqrt(n))
  *Spece(O(n))
  */
 public class Solution {
