@@ -1,3 +1,8 @@
+/*
+ * BFS
+ * Time complexity: O(numCourses + edges)
+ * Space complexity: O(numCourses + edges)
+ */
 public class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         int[] indegree = new int[numCourses];
