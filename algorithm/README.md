@@ -13,6 +13,11 @@
 * iterate design & analysis to come up with candidate solution
 * **implement it**
 
+# Ref
+* [演算法筆記](http://www.csie.ntnu.edu.tw/~u91029/index.html)
+* [编程之法：面试和算法心得](https://www.gitbook.com/book/wizardforcel/the-art-of-programming-by-july/details)
+* [資料結構與演算法/leetcode/lintcode題解](https://algorithm.yuanbin.me/zh-tw/index.html)
+
 # Cheat Sheet
 *!! keep this sheet as compact as possible !!*
 
@@ -46,17 +51,26 @@ PriorityQueue<Integer> pq = new PriorityQueue<>(SIZE, new Comparator() {
  * DummyNode: 當算法會修改HEAD NODE 時，可以避免 if null 的判斷，簡化代碼  
  * 雙指針: 找中間(一快一慢)／找重覆
  * [Linked List的复习总结](http://www.jianshu.com/p/3d4be8cbf94b)
-* [Tree](./Tree.md)
- * 進行複雜度分析時可統計對每個節點被訪問的次數，進而求得總的時間複雜度。
- * DFS
+* [Heap](https://www.cs.cmu.edu/~adamchik/15-121/lectures/Binary%20Heaps/heaps.html)
+ * array implementation: index 0不使用，從1開始，這樣在算parent index時直接除以2就好(Np = N/2)
+ * 每次add/removeMin時都要重新調整，add()->N/2; removeMin()->min( N\*2, N\*2 + 1)
+ * HeapSort: 全部加入後，在一個一個取出來
 * Priority Queue
  * [用 Heap 實作 Priority Queue](http://pages.cs.wisc.edu/~vernon/cs367/notes/11.PRIORITY-Q.html)
    * Time complexity for delete/insert：O(log n)
+* [Tree](./Tree.md)
+ * 進行複雜度分析時可統計對每個節點被訪問的次數，進而求得總的時間複雜度。
+ * DFS
 * Graph
+ * Edge List -> \(Adjacency Matrix, Adjacency Lists\)
+ * traversal: BFS / DFS
+ * Directed Acyclic Graph
+   * Topological Sort
+   * 找出所有合理的排列順序: BackTracing
+   * 計算所有合理的排列順序個數: DP
+ * Lowest Common Ancestor
+
 # Algorithm
-* bitwise
- * INT 操作要處理 overflow / underflow，偷懶就用 long 來處理
- * XOR - 可以用來做 swap，X := X XOR Y; Y := Y XOR X; X := X XOR Y
 * [Sort](./Sort.md)
  * Find kth element: ex: median of two sorted arrays, find...
 * [Dynamic Programming](./DP.md)
@@ -65,3 +79,21 @@ PriorityQueue<Integer> pq = new PriorityQueue<>(SIZE, new Comparator() {
  * 狀態間的轉化方程(從題目的隱含條件出發尋找遞推關係)
  * 初始化狀態的確定(由狀態和轉化方程得知)
  * 需要的結果(狀態轉移的終點)
+* Greedy Method
+ * 活動選擇問題: 把撞期的行程，表示成圖，稱作 Interval Graph
+ * Min spanning tree problem
+ * Fractional knapsack problem
+* BackTracing:枚舉取或不取  
+枚舉多維度數值（ n-tuple ）的方法。運用遞迴依序窮舉各個維度的數值，製作所有可能的多維度數值，並且在遞迴途中避免枚舉出不正確的多維度數值。
+ * Enumerate Permutations / Combinations
+ * 0/1 Knapsack Problem
+
+# Bitwise
+* 2補數：0就只有一個表示方式，一個數字的二補數就是將該數字作位元反相運算，再將結果加1
+* INT 操作要處理 overflow / underflow，偷懶就用 long 來處理
+* XOR - 可以用來做 swap
+```
+X := X XOR Y;
+Y := Y XOR X;
+X := X XOR Y
+```
