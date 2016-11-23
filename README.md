@@ -26,6 +26,9 @@ Owner 整理好的 solution 檔名請用 _sol.txt 當 suffix (ex: TwoSum_sol.txt
 * [Python 解題思路整理 (1-200)](https://shenjie1993.gitbooks.io/leetcode-python/content/001%20Two%20Sum.html)
 * [初學者練習 - LeetCode with Javascript](https://skyyen999.gitbooks.io/-leetcode-with-javascript/content/)
 * [Tushar Roy - 解題思路整理](https://www.youtube.com/user/tusharroy2525)
+* [Android Performance Patterns 中文整理](http://hukai.me/blog/archives/)
+
+
 
 ### Data Structure
 * [Data Structure Visualizations](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html)
