@@ -18,7 +18,7 @@ public class Solution {
 
 
     /**
-     * loop through the arrry, and put each of element in to a max-heap, whose size is k
+     * loop through the arrry, and put each of element in to a min-heap, whose size is k
      *
      *
      * Time  :O(n logn)
