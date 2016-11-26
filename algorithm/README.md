@@ -61,7 +61,7 @@ PriorityQueue<Integer> pq = new PriorityQueue<>(SIZE, new Comparator() {
 * [Tree](./Tree.md)
  * 進行複雜度分析時可統計對每個節點被訪問的次數，進而求得總的時間複雜度。
  * DFS
-* Graph
+* [Graph](./Graph.md)
  * Edge List -> \(Adjacency Matrix, Adjacency Lists\)
  * traversal: BFS / DFS
  * Directed Acyclic Graph
@@ -69,7 +69,7 @@ PriorityQueue<Integer> pq = new PriorityQueue<>(SIZE, new Comparator() {
    * 找出所有合理的排列順序: BackTracing
    * 計算所有合理的排列順序個數: DP
  * Lowest Common Ancestor
-
+ * Disjoint Sets / Union-find algorithm
 # Algorithm
 * [Sort](./Sort.md)
  * Find kth element: ex: median of two sorted arrays, find...
@@ -87,6 +87,7 @@ PriorityQueue<Integer> pq = new PriorityQueue<>(SIZE, new Comparator() {
 枚舉多維度數值（ n-tuple ）的方法。運用遞迴依序窮舉各個維度的數值，製作所有可能的多維度數值，並且在遞迴途中避免枚舉出不正確的多維度數值。
  * Enumerate Permutations / Combinations
  * 0/1 Knapsack Problem
+* permutation
 
 # Bitwise
 * 2補數：0就只有一個表示方式，一個數字的二補數就是將該數字作位元反相運算，再將結果加1
