@@ -11,6 +11,9 @@ import java.util.*;
 class Solution {
   public boolean isValidTree(int n, int[][] edges) {
 
+    if(edges.length == 0)
+        return n > 1 ? false : true;
+    
     // create a adj list;
     List<List<Integer>> adjList = new ArrayList<>(n);
     for(int i=0; i<n; i++) {
