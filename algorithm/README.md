@@ -70,6 +70,7 @@ PriorityQueue<Integer> pq = new PriorityQueue<>(SIZE, new Comparator() {
    * 計算所有合理的排列順序個數: DP
  * Lowest Common Ancestor
  * Disjoint Sets / Union-find algorithm
+
 # Algorithm
 * [Sort](./Sort.md)
  * Find kth element: ex: median of two sorted arrays, find...
@@ -83,11 +84,16 @@ PriorityQueue<Integer> pq = new PriorityQueue<>(SIZE, new Comparator() {
  * 活動選擇問題: 把撞期的行程，表示成圖，稱作 Interval Graph
  * Min spanning tree problem
  * Fractional knapsack problem
-* BackTracing:枚舉取或不取  
-枚舉多維度數值（ n-tuple ）的方法。運用遞迴依序窮舉各個維度的數值，製作所有可能的多維度數值，並且在遞迴途中避免枚舉出不正確的多維度數值。
+* BackTracking: 暴力求解的方式，對元素有**取或不取**兩種分支，儘早判斷剪支
  * Enumerate Permutations / Combinations
- * 0/1 Knapsack Problem
-* permutation
+ * 0/1 Knapsack Problem \(也可以用DP\)
+* Permutation/Combinations [全排列和全组合实现](https://www.google.com.tw/url?sa=t&rct=j&q=&esrc=s&source=web&cd=10&cad=rja&uact=8&ved=0ahUKEwixsLTQrMnQAhXBn5QKHUP9BVUQFghZMAk&url=http%3A%2F%2Fwuchong.me%2Fblog%2F2014%2F07%2F28%2Fpermutation-and-combination-realize%2F&usg=AFQjCNHD5qvumuJXD_PIQnIxAc2BSZMcpA&sig2=QravRlHYgJHFvIyanedvxw)
+ * 不重覆：
+   * BackTracking
+   * Heap's algorithm for Permutation
+ * 重覆
+* String
+ * KMP
 
 # Bitwise
 * 2補數：0就只有一個表示方式，一個數字的二補數就是將該數字作位元反相運算，再將結果加1
