@@ -10,13 +10,16 @@
 2.Divide and conquer
 - Divide: left and right
 
-- Merge: return the max(max of L, max of R, max of C)     
+- Merge: return the max(max of L, max of R, max of C)
+
                  O
 |<----------------------------------->|
+
          L                  R
 |<---------------->|<---------------->|
            |<---------------->|     
                    C
+
  C is the max subarray of 
    1. the largest sum of subarray starting from the right most element (denote it as rightMax) of L, 
    2. the largest sum of subarray starting from the left most element (denote it as leftMax) of R
@@ -24,8 +27,10 @@
 - How can we get leftMax and rightMax of O from L and R??
 
  leftMax = max (L.leftMax, L.total + R.LeftMax);
+ 
                    O
  |<----------------------------------->|
+ 
           L                  R
  |<---------------->|<---------------->|
  |<---------------->|<--------->|  (L.total + R.LeftMax)
