@@ -11,8 +11,7 @@
 - Divide: left and right
 
 - Merge: return the max(max of L, max of R, max of C)
-
-                 O
+                  O
 |<----------------------------------->|
 
          L                  R
