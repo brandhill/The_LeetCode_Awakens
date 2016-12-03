@@ -4,6 +4,8 @@ Key Concepts
 > Binary Tree遍历问题有一个关键点就是当指针走到底层以后如何返回的问题
 實作上可以用選擇 recursive / iterative+stack
 
+[Sample Code](../Basic/TreeTraversal.java)
+
 ### preorder
 * recursive
 * iterative
@@ -18,10 +20,8 @@ Key Concepts
 實作與preordr一樣，輸出順序不同
 
 ### postorder
-有一种省事的方法，即将preorder的方法将结果输入到一个stack中，然后反向输出即可
 * recursive
-* iterative
-使用了两个指针来记录节点访问情况
+* iterative: like preorder (VLR, LRV), use another stack to save preorder traversal result
 * Morris
 實作很不一樣
 
