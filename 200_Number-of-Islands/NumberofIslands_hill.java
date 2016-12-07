@@ -12,7 +12,9 @@
 
     Your runtime beats 94.02% of java submissions.
 
-    Each element is visited once only. So time is O(m*n) ,and space is O(1)
+    Each element is visited once only.
+
+    So time is O(m*n) ,and space is O(1)
 
 */
 

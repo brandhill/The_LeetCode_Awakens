@@ -1,7 +1,7 @@
 /**
  * Created by hill on 06/11/2016.
  * <p>
- * https://leetcode.com/problems/binary-search-tree-iterator/*
+ * https://leetcode.com/problems/binary-search-tree-iterator/
  * <p>
  * Implement an iterator over a binary search tree (BST). Your iterator will be initialized with the root node of a BST.
  * Calling next() will return the next smallest number in the BST.
