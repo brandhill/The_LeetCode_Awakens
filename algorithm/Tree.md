@@ -13,9 +13,9 @@ Key Concepts
 * Morris
 不需要额外空间
 
-### inorder
+### inorder : in-order BST can get a list of values in ascending order
 * recursive
-* iterative
+* iterative + stack (loop to left)
 * Morris
 實作與preordr一樣，輸出順序不同
 

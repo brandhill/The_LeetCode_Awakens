@@ -151,5 +151,6 @@ public class TreeTraversal {
     tree.inorder();
     tree.postorder();
     tree.levelorder();
+
   }
 }

@@ -1,3 +1,4 @@
+# Maximum Size Subarray Sum Equals k
 
 Given an array nums and a target value k, find the maximum length of a subarray that sums to k. If there isn't one, return 0 instead.
 
@@ -11,3 +12,6 @@ return 2. (because the subarray [-1, 2] sums to 1 and is the longest)
 
 Follow Up:  
 Can you do it in O(n) time?
+
+# Similar Problems
+[209. Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/)
