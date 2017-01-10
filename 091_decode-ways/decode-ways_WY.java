@@ -1,3 +1,7 @@
+/*
+ 可以從頭開始計算，也可以從尾開始計算
+ 不過考慮到如果 string 變成 stream的時候，從頭開始會比較好
+ */
 public class Solution {
     public int numDecodings(String s) {
         char[] input = s.toCharArray();
